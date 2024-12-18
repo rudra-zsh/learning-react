@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import Name from './Name.jsx'
+import {React} from 'react'
+
 /*
 var Name = createRoot(document.getElementById('name')
 	Name.render(
@@ -11,25 +13,28 @@ var Name = createRoot(document.getElementById('name')
 		</React.StrictMode>
 	)
 */
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-   <Name />
-	<App />
-  </StrictMode>,
+var user = 'robot'
+function Phul(){
+return (	<h1>Hello {user}</h1>
 )
+}
+/*
+const reactElement = React.createElement('a',{href:"https://google.com"},
+	'Google Link')
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<React.StrictMode>
-	<Name />
-	<App />
-	</React.StrictMode>,
+	reactElement
 )
+*/
 
-var root = ReactDOM.createRoot(document.getElementById('root'))
+var rb = createRoot(document.getElementById('root'))
+	rb.render(
 
-root.render(
-	<React.StrictMode>
-<Name />
-	<App />
-	</React.StrictMode>,
+	<StrictMode>
+	<Phul />
+		reactElement
+		<App />
+	</StrictMode>
+
 )
