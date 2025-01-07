@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import User from './User.jsx'
 import List from './List.jsx'
+import Event from './event.jsx'
+import Doc from './doc.jsx'
 
 function Button() {
   function sayHi(){
@@ -24,7 +26,12 @@ function App() {
       <br />
       <User />
       <br />
-      <List />
+	<Event />     
+  <Event />
+  <br/>
+  <Doc />
+  <br />  
+ <List />
     </>
   )
 }
