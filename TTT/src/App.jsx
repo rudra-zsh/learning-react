@@ -1,4 +1,6 @@
 import './App.css'
+import Board_ex from './Board.jsx'
+
 export default function Board(){
   return(
     <>
@@ -17,6 +19,9 @@ export default function Board(){
       <button className="squre">8</button>
       <button className="squre">9</button>
     </div>
+    <br />
+    <br />
+    <Board_ex />
     </>
   );
 }
