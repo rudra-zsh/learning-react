@@ -1,0 +1,344 @@
+/* ======================================================
+   MASSIVE, ULTRA-MODERN, HEAVY ANIMATED CSS FOR TIC-TAC-TOE
+   With Updated, More Elegant "History" Buttons
+====================================================== */
+
+/* ========== RESET ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    height: 100%; /* ensure body can fill the viewport */
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden; /* in case of wide animations */
+  }
+  
+  /* ========== MAIN .game CONTAINER ========== */
+  .game {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+  
+    /* Default swirling multi-color gradient */
+    background: linear-gradient(-45deg, #ff6b6b, #c56cff, #6bcfff, #6bffb3, #f3ff6b);
+    background-size: 1200% 1200%;
+    animation: swirl 10s linear infinite;
+    transition: background 0.8s ease;
+  }
+  
+  /* Keyframes for the default swirling gradient */
+  @keyframes swirl {
+    0% {
+      background-position: 0% 50%;
+    }
+    25% {
+      background-position: 50% 100%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    75% {
+      background-position: 50% 0%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Alternate swirl class for .game on toggle */
+  .bg-alt {
+    background: linear-gradient(60deg, #ff9e9e, #ffae6f, #fff26b, #9effba, #9fefff, #d89eff);
+    background-size: 1500% 1500%;
+    animation: swirlAlt 12s ease-in-out infinite;
+  }
+  
+  /* Keyframes for the alternate swirling background */
+  @keyframes swirlAlt {
+    0% {
+      background-position: 0% 60%;
+    }
+    20% {
+      background-position: 50% 40%;
+    }
+    40% {
+      background-position: 100% 50%;
+    }
+    60% {
+      background-position: 50% 100%;
+    }
+    80% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 0% 60%;
+    }
+  }
+  
+  /* ========== GAME BOARD & INFO LAYOUT ========== */
+  .game-board {
+    margin-right: 40px;
+  }
+  
+  .game-info {
+    max-width: 220px;
+  }
+  
+  .moves-list {
+    list-style-type: none;
+    margin-top: 12px;
+  }
+  
+  .moves-item {
+    margin-bottom: 12px;
+  }
+  
+  /* ========== STATUS TEXT ========== */
+  #board-status {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 0 5px #000;
+  }
+  
+  /* ========== BOARD CONTAINER ========== */
+  #board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px; /* spacing between rows */
+    position: relative; /* for winner-burst effect */
+  }
+  
+  /* 
+     ========== WINNER BURST EFFECT ==========
+     A radial "explosion" if there's a winner
+  */
+  .winner-burst::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #ffffff88 10%, transparent 60%);
+    opacity: 0;
+    border-radius: 50%;
+    animation: burst 1s ease-out forwards;
+    pointer-events: none;
+  }
+  
+  @keyframes burst {
+    0% {
+      opacity: 0.8;
+      width: 10px;
+      height: 10px;
+    }
+    50% {
+      opacity: 1;
+      width: 400px;
+      height: 400px;
+    }
+    100% {
+      opacity: 0;
+      width: 600px;
+      height: 600px;
+    }
+  }
+  
+  /* ========== BOARD ROWS ========== */
+  .board-row {
+    display: flex;
+    gap: 12px; /* spacing between squares */
+  }
+  
+  /* ========== SQUARES ========== */
+  .square {
+    width: 90px;
+    height: 90px;
+    background: #111; /* Dark background for neon contrast */
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    perspective: 600px; /* for 3D transform */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px #fffb, 0 0 20px #fffb, 0 0 30px #fffb;
+  }
+  
+  .square::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.05),
+      transparent 50%
+    );
+    pointer-events: none;
+  }
+  
+  .square:hover {
+    transform: rotateY(180deg) scale(1.05);
+    box-shadow: 0 0 20px #ffea00, 0 0 40px #ffea00, 0 0 60px #ffea00;
+  }
+  
+  .square:active {
+    transform: rotateY(180deg) scale(0.97);
+  }
+  
+  /* 
+     If a square is 'filled' (has X or O), 
+     add a subtle neon ring for distinction
+  */
+  .square.filled {
+    box-shadow: 0 0 15px #ff0084, 0 0 30px #ff0084aa, 0 0 45px #ff0084aa;
+  }
+  
+  /* ========== HISTORY (MOVES) BUTTONS ========== */
+  /* Make the moves buttons glass-like and modern */
+  .moves-button {
+    position: relative;
+    display: inline-block;
+    padding: 10px 16px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    backdrop-filter: blur(5px); /* glass effect */
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+    transition: 
+      background 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  
+  .moves-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  }
+  
+  .moves-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+  }
+  
+  /* ========== TOGGLE BACKGROUND BUTTON ========== */
+  .toggle-bg-button {
+    margin-top: 20px;
+    padding: 12px 16px;
+    background-color: #fa6c00;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background 0.4s, transform 0.2s, box-shadow 0.3s;
+  }
+  
+  .toggle-bg-button:hover {
+    background-color: #ff9933;
+    transform: scale(1.07);
+    box-shadow: 0 0 8px #ff993388;
+  }
+  
+  /* ========== RESPONSIVE FOR SMALL SCREENS ========== */
+  @media (max-width: 600px) {
+    .square {
+      width: 70px;
+      height: 70px;
+      font-size: 2rem;
+    }
+  
+    .game {
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+  
+    .game-board {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+  
+
+  .moves-button {
+    /* Ensures the button is sized to fit its content properly */
+    display: inline-block; 
+  
+    /* Adjust your padding as needed */
+    padding: 8px 14px;  
+  
+    /* Ensures your text is tall enough not to get cut off */
+    line-height: 1.2; 
+  
+    /* Basic styling (adjust as you wish) */
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  
+    /* Glass-like background, if supported */
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+  
+    /* If you still see issues, you can remove or reduce the blur:
+       backdrop-filter can be quirky in older Chromium versions. */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  
+    /* A mild glow/shadow for an elegant effect */
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+  
+    /* Smooth transitions for hover states */
+    transition:
+      background 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  
+  .moves-button:hover {
+    /* Slightly brighter background */
+    background: rgba(255, 255, 255, 0.3);
+  
+    /* Slight scale-up effect */
+    transform: scale(1.05);
+  
+    /* More pronounced glow */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  }
+  
+  .moves-button:active {
+    /* Press in a bit on click */
+    transform: scale(0.95);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+  }
+  

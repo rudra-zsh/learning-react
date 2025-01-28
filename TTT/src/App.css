@@ -12,3 +12,214 @@ button{
   padding: 10px;
   box-shadow: 5px 5px 5px black;
 }
+
+/* 1) Basic Reset and Body Styling */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* 2) Container Around the Whole Game */
+.game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+}
+
+/* 3) Board on the Left, Moves/Info on the Right */
+.game-board {
+  margin-right: 40px;
+}
+
+.game-info {
+  margin-top: 10px;
+}
+
+.game-info ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+/* 4) Status Message */
+.status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* 5) Board Rows (each row holds 3 squares) */
+.board-row {
+  display: flex;
+}
+
+/* 6) Squares Styling */
+.square {
+  width: 80px;
+  height: 80px;
+  background: #ffffff;
+  border: 2px solid #999;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.2s ease-in-out;
+}
+
+.square:hover {
+  background: #e8f5e9;
+}
+
+.square:focus {
+  outline: 2px solid #4caf50;
+}
+
+/* 7) Moves List Buttons */
+.game-info button {
+  background-color: #fff;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.game-info button:hover {
+  background-color: #f2f2f2;
+}
+
+.game-info button:focus {
+  outline: 2px solid #333;
+}
+
+
+/* Global Reset / Basic Setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  background: linear-gradient(to bottom right, #fafafa, #d6d6d6);
+  color: #333;
+  min-height: 100vh;
+}
+
+/* Main Game Container */
+.game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+}
+
+/* Board Section */
+.game-board {
+  margin-right: 30px;
+}
+
+/* Info Section */
+.game-info {
+  max-width: 200px;
+}
+
+/* Status Display */
+#board-status {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Board Layout */
+#board-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* space between rows */
+}
+
+/* Each Board Row */
+.board-row {
+  display: flex;
+  gap: 10px; /* space between squares */
+}
+
+/* Square Buttons */
+.square {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  border: 2px solid #999;
+  font-size: 2rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  cursor: pointer;
+}
+
+.square:hover {
+  background-color: #eef;
+  transform: scale(1.02);
+}
+
+.square:active {
+  transform: scale(0.98);
+}
+
+/* Moves List */
+.moves-list {
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+.moves-item {
+  margin-bottom: 8px;
+}
+
+/* Move Buttons */
+.moves-button {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #999;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.moves-button:hover {
+  background-color: #ddd;
+}
+
+.moves-button:focus {
+  outline: 2px solid #666;
+}
+
+/* Responsive Scaling */
+@media (max-width: 600px) {
+  .square {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  .game {
+    flex-direction: column;
+    align-items: center;
+  }
+  .game-board {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
